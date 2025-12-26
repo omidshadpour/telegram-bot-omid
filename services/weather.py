@@ -1,0 +1,21 @@
+import requests
+
+def get_weather(city: str):
+    API_KEY = "d6493941945bc5e34743865ad35ab308"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=fa"
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if data.get("cod") != 200:
+            return "متاسفم ، نتونستم اطلاعات هواشناسی رو پیدا کنم"
+        city_name = data["name"]
+        temp = data["main"]["temp"]
+        description = data["weather"][0]["description"]
+
+        return f"هوای {city_name} الان {temp} درجه سانتی‌گراد و وضعیت: {description}"
+
+    
+    except Exception as e:
+        return "خطایی رخ داده ، لطفا بعدا تلاش کنید"
