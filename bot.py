@@ -1,9 +1,10 @@
 from telegram.ext import ApplicationBuilder , CommandHandler , MessageHandler , filters 
 from handlers import start , handler_message , help_commend , weather_command , currency_command 
 import os
+
 def main():
 
-    TOKEN = os.getenv("8021508877:AAHcWcLKv_F7A3YaNMX7qQ7ue711jl1r-YM")
+    TOKEN = os.getenv("TOKEN")
     application = ApplicationBuilder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start" , start))
