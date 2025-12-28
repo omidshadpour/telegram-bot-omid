@@ -8,14 +8,22 @@ def get_gold_price():
     try:
         response = requests.get(url)
         data = response.json()
-        print(data)
 
-        if "18ayar" not in data:
-            return "نتونستم قیمت طلا رو پیدا کنم."
+        if "18ayar" in data:
+            price = data["18ayar"]["value"]
+            return f"قیمت هر گرم طلای ۱۸ عیار: {price:,} تومان"
 
-        price = data["18ayar"]["value"]
+        if "abshodeh" in data:
+            price = int(data["abshodeh"]["value"])
+            return f"قیمت هر مثقال طلای آبشده: {price:,} تومان"
 
-        return f"قیمت هر گرم طلای ۱۸ عیار: {price:,} تومان"
+        if "sekkeh" in data:
+            price = int(data["sekkeh"]["value"])
+            return f"قیمت سکه امامی: {price:,} تومان"
+
+        return "متأسفم، هیچ اطلاعاتی درباره قیمت طلا پیدا نشد."
+
+        
     except Exception:
         return "خطایی رخ داده است ، لطفا بعدا تلاش کنید."
     
