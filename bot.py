@@ -11,12 +11,12 @@ def main():
         entry_points = [CommandHandler("start" , start)],
         states = {
             CHOOSING : [
-                MessageHandler(filters.Regex("^هواشناسی$" , ask_city)),
-                MessageHandler(filters.Regex("^نرخ دلار$") , ask_currency),
+                MessageHandler(filters.Regex("^هواشناسی$") , ask_city),
+                MessageHandler(filters.Regex("^نرخ ارز$") , ask_currency),
                 MessageHandler(filters.Regex("^راهنما$"), help_commend)
             ] ,
-            WEATHER : [MessageHandler(filters.TEXT & filters.COMMAND , weather_command)],
-            CURRENCY : [MessageHandler(filters.TEXT & filters.COMMAND , currency_command)]
+            WEATHER : [MessageHandler(filters.TEXT & ~filters.COMMAND , weather_command)],
+            CURRENCY : [MessageHandler(filters.TEXT & ~filters.COMMAND , currency_command)]
         }
     )
 
