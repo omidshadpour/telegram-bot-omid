@@ -2,6 +2,7 @@ from telegram import Update , ReplyKeyboardMarkup
 from telegram.ext import ContextTypes , ConversationHandler
 from services.weather import get_weather
 from services.currency import get_currency
+from services.gold import get_gold_price
 
 CHOOSING , WEATHER , CURRENCY = range(3)
 
@@ -12,6 +13,7 @@ async def start(update: Update , context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         ["هواشناسی"],
         ["نرخ ارز"],
+        ["قیمت طلا"],
         ["راهنما"]
 
     ]
@@ -94,9 +96,26 @@ async def currency_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
     await start(update , context)
     return CHOOSING
 
+
+# ------------------ /gold ------------------
+async def gold_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
+    result = get_gold_price()
+    await update.message.reply_text(result)
+    return CHOOSING
+
+
+
+
+
+
+
+
+
+
+
 # ------------------ /help ------------------
 
-async def help_commend(update : Update  , context: ContextTypes.DEFAULT_TYPE):
+async def help_command(update : Update  , context: ContextTypes.DEFAULT_TYPE):
 
     message = (
         "📌 راهنمای ربات امید\n\n"
@@ -127,17 +146,13 @@ async def handler_message(update: Update , context: ContextTypes.DEFAULT_TYPE):
         reply = "از منو استفاده کن یا دستور /help رو بزن 🌟"
          
     elif user_text == "هواشناسی":
-        reply = "اسم شهر رو بگو. مثال: تهران"
+        return await ask_city(update , context)
 
     elif user_text == "نرخ ارز":
-        reply = "دو ارز رو بگو. مثال: دلار به یورو"
+        return await ask_currency(update , context)
 
-    elif "هوا" in user_text:
-        reply = get_weather(user_text)
-
-
-    elif "دلار" in user_text or "یورو" in user_text:
-        reply = get_currency("USD" , "EUR")
+    elif user_text == "قیمت طلا":
+        reply = " این قسمت به زودی اظافه میشه"
 
     else:
         reply = f"دستور نا شناخته است ، لطفا از منو استفاده کنید"                        
