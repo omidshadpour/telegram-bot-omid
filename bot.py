@@ -17,7 +17,8 @@ def main():
             ] ,
             WEATHER : [MessageHandler(filters.TEXT & ~filters.COMMAND , weather_command)],
             CURRENCY : [MessageHandler(filters.TEXT & ~filters.COMMAND , currency_command)]
-        }
+        } ,
+        fallbacks = [CommandHandler("cancel" , help_commend)]
     )
 
 

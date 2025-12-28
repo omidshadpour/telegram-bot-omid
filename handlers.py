@@ -137,9 +137,3 @@ async def handler_message(update: Update , context: ContextTypes.DEFAULT_TYPE):
         reply = f"دستور نا شناخته است ، لطفا از منو استفاده کنید"                        
 
     await update.message.reply_text(reply)
-
-
-    
-
-
-
