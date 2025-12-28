@@ -1,29 +1,18 @@
 import requests
-import os
 
 def get_gold_price():
-    API_KEY = os.getenv("NAVASAN_API_KEY")
-    url = f"https://api.navasan.tech/latest/?api_key={API_KEY}"
+    url = "https://api.accessban.com/v1/market/indicator/price_gram_18k"
 
     try:
         response = requests.get(url)
         data = response.json()
 
-        if "18ayar" in data:
-            price = data["18ayar"]["value"]
-            return f"قیمت هر گرم طلای ۱۸ عیار: {price:,} تومان"
+        if data.get("status") != "ok":
+            return "نتونستم قیمت طلا رو پیدا کنم."
 
-        if "abshodeh" in data:
-            price = int(data["abshodeh"]["value"])
-            return f"قیمت هر مثقال طلای آبشده: {price:,} تومان"
+        price = int(data["data"]["price"])
+        return f"قیمت هر گرم طلای ۱۸ عیار: {price:,} تومان"
 
-        if "sekkeh" in data:
-            price = int(data["sekkeh"]["value"])
-            return f"قیمت سکه امامی: {price:,} تومان"
-
-        return "متأسفم، هیچ اطلاعاتی درباره قیمت طلا پیدا نشد."
-
-        
     except Exception:
         return "خطایی رخ داده است ، لطفا بعدا تلاش کنید."
     
