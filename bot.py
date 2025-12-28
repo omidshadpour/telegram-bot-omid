@@ -1,5 +1,5 @@
 from telegram.ext import ApplicationBuilder , CommandHandler , MessageHandler , ConversationHandler , ContextTypes ,filters 
-from handlers import start , handler_message , help_commend , ask_city ,weather_command , ask_currency , currency_command , CHOOSING , WEATHER ,CURRENCY
+from handlers import start , handler_message , help_commend , ask_city ,weather_command , ask_currency , currency_command , cancel , CHOOSING , WEATHER ,CURRENCY
 import os
 
 def main():
@@ -22,10 +22,11 @@ def main():
     )
 
 
-    application.add_handler(CommandHandler("help" , help_commend))
+    application.add_handler(CommandHandler("help", help_commend))
+    application.add_handler(CommandHandler("cancel", cancel))
     application.add_handler(conv_handler)
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND , handler_message))
-
+    
     print("ربات در حال اجرا است")
     application.run_polling()
 

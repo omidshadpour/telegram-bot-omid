@@ -1,5 +1,5 @@
 from telegram import Update , ReplyKeyboardMarkup
-from telegram.ext import ContextTypes
+from telegram.ext import ContextTypes , ConversationHandler
 from services.weather import get_weather
 from services.currency import get_currency
 
@@ -108,6 +108,12 @@ async def help_commend(update : Update  , context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(message)
     return CHOOSING
+
+# ------------------ /end ------------------
+async def cancel(update : Update , context : ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("گفتگو پایان یافت.")
+    return ConversationHandler.END
+
 
 # ------------------ /message ------------------
 
