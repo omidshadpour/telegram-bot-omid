@@ -25,7 +25,6 @@ def main():
     application.add_handler(CommandHandler("help", help_commend))
     application.add_handler(CommandHandler("cancel", cancel))
     application.add_handler(conv_handler)
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND , handler_message))
     
     print("ربات در حال اجرا است")
     application.run_polling()
