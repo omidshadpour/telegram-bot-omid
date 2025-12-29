@@ -5,7 +5,7 @@ from services.currency import get_currency
 from services.gold import get_gold_price
 from services.translate import translate_text
 
-CHOOSING , WEATHER , CURRENCY = range(3)
+CHOOSING , WEATHER , CURRENCY , TRANSLATE= range(4)
 
 # ------------------ /start ------------------
 
@@ -100,25 +100,26 @@ async def currency_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
 
 
 # ------------------ /gold ------------------
+
 async def gold_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
     result = get_gold_price()
     await update.message.reply_text(result)
     return CHOOSING
 
 
-# ------------------ /start ------------------
+# ------------------ /translate ------------------
 
-async def translate_commend(update: Update , context : ContextTypes.DEFAULT_TYPE):
-
-    if context.args:
-        text = " ".join(context.args)
-        result = translate_text(text , target_lang = "en")
-
-        await update.message.reply_text(result)
+async def ask_translate(update: Update , context : ContextTypes.DEFAULT_TYPE):
     
-    else:
-        await update.message.reply_text("لطفاً متنی برای ترجمه وارد کنید. مثال: /translate سلام")
-    
+    await update.message.reply_text("لطفاً متنی که می‌خوای ترجمه کنم رو وارد کن:")
+    return TRANSLATE
+
+
+async def translate_command(update: Update , context : ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
+    result = translate_text(text , target_lang = "en")
+
+    await update.message.reply_text(result)
     return CHOOSING
 
 
