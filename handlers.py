@@ -15,6 +15,7 @@ async def start(update: Update , context: ContextTypes.DEFAULT_TYPE):
         ["هواشناسی"],
         ["نرخ ارز"],
         ["قیمت طلا"],
+        ["ترجمه"],
         ["راهنما"]
 
     ]
