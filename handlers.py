@@ -27,7 +27,7 @@ async def start(update: Update , context: ContextTypes.DEFAULT_TYPE):
     user_first_name = update.effective_user.first_name
     massage = f"سلام {user_first_name}! یکی از گزینه‌ها رو انتخاب کن 👇"
 
-    await update.message.reply_text(massage , reply_markup = reply_markup)
+    await update.effective_chat.send_message(massage , reply_markup = reply_markup)
     return CHOOSING
 
 
