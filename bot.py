@@ -13,11 +13,11 @@ def main():
         entry_points = [CommandHandler("start" , start)],
         states = {
             CHOOSING : [
-                MessageHandler(filters.Regex("^هواشناسی$") , ask_city),
-                MessageHandler(filters.Regex("^نرخ ارز$") , ask_currency),
-                MessageHandler(filters.Regex("^راهنما$"), help_command),
-                MessageHandler(filters.Regex("^قیمت طلا$") , gold_command),
-                MessageHandler(filters.Regex("^ترجمه$") , ask_translate)
+                MessageHandler(filters.Regex("^🌤 هواشناسی$") , ask_city),
+                MessageHandler(filters.Regex("^💱 نرخ ارز$") , ask_currency),
+                MessageHandler(filters.Regex("^🥇 قیمت طلا") , gold_command),
+                MessageHandler(filters.Regex("^🌍 ترجمه") , ask_translate),
+                MessageHandler(filters.Regex("^ℹ️ راهنما"), help_command)
             ] ,
             WEATHER : [MessageHandler(filters.TEXT & ~filters.COMMAND , weather_command)],
             CURRENCY : [MessageHandler(filters.TEXT & ~filters.COMMAND , currency_command)],
