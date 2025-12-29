@@ -140,6 +140,8 @@ async def translate_command(update: Update , context : ContextTypes.DEFAULT_TYPE
     result = translate_text(text , target_lang = target_lang)
 
     await update.message.reply_text(result)
+
+    await start(update , context)
     return CHOOSING
 
 
