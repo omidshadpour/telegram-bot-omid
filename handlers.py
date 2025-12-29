@@ -12,11 +12,13 @@ CHOOSING , WEATHER , CURRENCY , CHOOSE_LANG , TRANSLATE= range(5)
 async def start(update: Update , context: ContextTypes.DEFAULT_TYPE):
 
     keyboard = [
-        ["هواشناسی"],
-        ["نرخ ارز"],
-        ["قیمت طلا"],
-        ["ترجمه"],
-        ["راهنما"]
+        ["🌤 هواشناسی"],
+        ["💱 نرخ ارز"],
+        ["🥇 قیمت طلا"],
+        ["🌍 ترجمه"],
+        ["ℹ️ راهنما"]
+]
+
 
     ]
 
@@ -104,6 +106,8 @@ async def currency_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
 async def gold_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
     result = get_gold_price()
     await update.message.reply_text(result)
+
+    await start(update , context)
     return CHOOSING
 
 
@@ -161,6 +165,8 @@ async def help_command(update : Update  , context: ContextTypes.DEFAULT_TYPE):
 
 
     await update.message.reply_text(message)
+    
+    await start(update , context)
     return CHOOSING
 
 # ------------------ /end ------------------
