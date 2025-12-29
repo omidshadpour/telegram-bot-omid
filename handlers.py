@@ -19,9 +19,6 @@ async def start(update: Update , context: ContextTypes.DEFAULT_TYPE):
         ["ℹ️ راهنما"]
 ]
 
-
-    ]
-
     reply_markup = ReplyKeyboardMarkup(
         keyboard,
         resize_keyboard = True 
