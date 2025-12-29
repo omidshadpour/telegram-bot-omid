@@ -1,16 +1,19 @@
 import requests
+from bs4 import BeautifulSoup
 
 def get_gold_price():
-    url = "https://api.accessban.com/v1/market/indicator/price_gram_18k"
+    url = "https://www.tgju.org/profile/geram18"
 
     try:
         response = requests.get(url)
-        data = response.json()
+        soup = BeautifulSoup(response.txt , "html.parser")
 
-        if data.get("status") != "ok":
+        price_tag = soup.find("span" , {"id" : "info-price"})
+        if not price_tag:
             return "نتونستم قیمت طلا رو پیدا کنم."
 
-        price = int(data["data"]["price"])
+        price = price_tag.text.stip()
+        
         return f"قیمت هر گرم طلای ۱۸ عیار: {price:,} تومان"
 
     except Exception:
