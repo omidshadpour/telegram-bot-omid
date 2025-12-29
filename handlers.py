@@ -5,7 +5,7 @@ from services.currency import get_currency
 from services.gold import get_gold_price
 from services.translate import translate_text
 
-CHOOSING , WEATHER , CURRENCY , TRANSLATE= range(4)
+CHOOSING , WEATHER , CURRENCY , CHOOSE_LANG , TRANSLATE= range(5)
 
 # ------------------ /start ------------------
 
@@ -110,14 +110,34 @@ async def gold_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
 # ------------------ /translate ------------------
 
 async def ask_translate(update: Update , context : ContextTypes.DEFAULT_TYPE):
-    
+    keyboard =  [
+        ["انگلیسی" , "فرانسوی"],
+        ["عربی","آلمانی"]
+    ]
+
+    reply_markup = ReplyKeyboardMarkup(keyboard , one_time_keyboard = True , resize_keyboard = True)
+    await update.message.reply_text("لطفاً زبان مقصد رو انتخاب کن:" , reply_markup = reply_markup)
+    return CHOOSE_LANG
+
+async def choose_lang(update: Update , context : ContextTypes.DEFAULT_TYPE):
+    lang_map = {
+        "انگلیسی": "en",
+        "فرانسوی": "fr",
+        "عربی": "ar",
+        "آلمانی": "de"
+
+    }
+
+    chosen = update.message.text
+    context.user_data["target_lang"] = lang_map.get(chosen , "en")
     await update.message.reply_text("لطفاً متنی که می‌خوای ترجمه کنم رو وارد کن:")
     return TRANSLATE
 
 
 async def translate_command(update: Update , context : ContextTypes.DEFAULT_TYPE):
     text = update.message.text
-    result = translate_text(text , target_lang = "en")
+    target_lang = context.user_data.get("target_lang" , "en")
+    result = translate_text(text , target_lang = target_lang)
 
     await update.message.reply_text(result)
     return CHOOSING
