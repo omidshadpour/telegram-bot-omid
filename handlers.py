@@ -3,6 +3,7 @@ from telegram.ext import ContextTypes , ConversationHandler
 from services.weather import get_weather
 from services.currency import get_currency
 from services.gold import get_gold_price
+from services.translate import translate_text
 
 CHOOSING , WEATHER , CURRENCY = range(3)
 
@@ -104,13 +105,20 @@ async def gold_command(update: Update , context: ContextTypes.DEFAULT_TYPE):
     return CHOOSING
 
 
+# ------------------ /start ------------------
 
+async def translate_commend(update: Update , context : ContextTypes.DEFAULT_TYPE):
 
+    if context.args:
+        text = " ".join(context.args)
+        result = translate_text(text , target_lang = "en")
 
-
-
-
-
+        await update.message.reply_text(result)
+    
+    else:
+        await update.message.reply_text("لطفاً متنی برای ترجمه وارد کنید. مثال: /translate سلام")
+    
+    return CHOOSING
 
 
 # ------------------ /help ------------------

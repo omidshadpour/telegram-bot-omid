@@ -1,5 +1,5 @@
 from telegram.ext import ApplicationBuilder , CommandHandler , MessageHandler , ConversationHandler , ContextTypes ,filters 
-from handlers import start , handler_message , help_command , ask_city ,weather_command , ask_currency , currency_command , gold_command , cancel , CHOOSING , WEATHER ,CURRENCY
+from handlers import start , handler_message , help_command , ask_city ,weather_command , ask_currency , currency_command , gold_command  , translate_commend , cancel , CHOOSING , WEATHER ,CURRENCY
 import os
 
 def main():
@@ -16,7 +16,8 @@ def main():
                 MessageHandler(filters.Regex("^هواشناسی$") , ask_city),
                 MessageHandler(filters.Regex("^نرخ ارز$") , ask_currency),
                 MessageHandler(filters.Regex("^راهنما$"), help_command),
-                MessageHandler(filters.Regex("^قیمت طلا$") , gold_command)
+                MessageHandler(filters.Regex("^قیمت طلا$") , gold_command),
+                MessageHandler(filters.Regex("^ترجمه$") , translate_commend)
             ] ,
             WEATHER : [MessageHandler(filters.TEXT & ~filters.COMMAND , weather_command)],
             CURRENCY : [MessageHandler(filters.TEXT & ~filters.COMMAND , currency_command)]
