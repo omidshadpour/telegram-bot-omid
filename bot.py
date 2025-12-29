@@ -1,5 +1,5 @@
 from telegram.ext import ApplicationBuilder , CommandHandler , MessageHandler , ConversationHandler , ContextTypes ,filters 
-from handlers import start , handler_message , help_command , ask_city ,weather_command , ask_currency , currency_command , gold_command  , ask_translate ,translate_command , cancel , CHOOSING , WEATHER ,CURRENCY , TRANSLATE
+from handlers import start , handler_message , help_command , ask_city ,weather_command , ask_currency , currency_command , gold_command , ask_translate , choose_lang ,translate_command , cancel , CHOOSING , WEATHER ,CURRENCY , TRANSLATE , CHOOSE_LANG
 import os
 
 def main():
@@ -21,7 +21,9 @@ def main():
             ] ,
             WEATHER : [MessageHandler(filters.TEXT & ~filters.COMMAND , weather_command)],
             CURRENCY : [MessageHandler(filters.TEXT & ~filters.COMMAND , currency_command)],
+            CHOOSE_LANG : [MessageHandler(filters.TEXT & ~filters.COMMAND , choose_lang)],
             TRANSLATE : [MessageHandler(filters.TEXT & ~filters.COMMAND , translate_command)]
+
         } ,
         fallbacks = [CommandHandler("cancel" , cancel)]
     )

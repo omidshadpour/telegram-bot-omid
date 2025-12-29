@@ -151,7 +151,10 @@ async def help_command(update : Update  , context: ContextTypes.DEFAULT_TYPE):
         "📌 راهنمای ربات امید\n\n"
         "1️⃣ وضعیت هوا: /weather tehran\n"
         "2️⃣ نرخ ارز: /currency usd eur\n"
+        "3️⃣ قیمت طلا: از منو انتخاب کن\n"
+        "4️⃣ ترجمه: از منو انتخاب کن و زبان مقصد رو تعیین کن 🌍\n"
         "یا از دکمه‌های منو استفاده کن 🌟"
+
     )
 
 
@@ -182,7 +185,7 @@ async def handler_message(update: Update , context: ContextTypes.DEFAULT_TYPE):
         return await ask_currency(update , context)
 
     elif user_text == "قیمت طلا":
-        reply = " این قسمت به زودی اظافه میشه"
+        return await gold_command(update , context)
 
     else:
         reply = f"دستور نا شناخته است ، لطفا از منو استفاده کنید"                        
