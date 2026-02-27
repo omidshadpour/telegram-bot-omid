@@ -19,18 +19,31 @@ The bot provides various features to users and is designed in a modular structur
 
 project/ 
 │── bot.py              # نقطه‌ی شروع ربات 
+
 │── handlers.py         # مدیریت منو و دستورات 
+
 │── requirements.txt    # لیست کتابخانه‌های مورد نیاز 
+
 │── Procfile            # تنظیمات دیپلوی (Heroku/Railway) 
+
 │── runtime.txt         # نسخه‌ی پایتون برای دیپلوی 
+
 │── README.md           # توضیحات پروژه 
+
 │ ├── services/           # سرویس‌های اصلی 
+
 │   ├── weather.py 
+
 │   ├── currency.py 
+
 │   ├── gold.py 
+
 │   └── translate.py 
+
 │ └── utils/              # ابزارهای جانبی 
+
 └── logger.py
+
 
 
 ---
@@ -38,7 +51,7 @@ project/
 ## 🚀 Installation & Usage
 
 1. Clone the project:
-```bash
+
 git clone <repo-url>
 cd <repo-folder>
 
